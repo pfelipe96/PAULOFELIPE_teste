@@ -1,0 +1,23 @@
+header{
+    background-color: #222;
+    height:auto;
+    padding: 1rem;
+    width: 100%;
+    overflow: hidden;
+    color: white;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header nav a{
+    margin: 1rem;
+    color: white;
+    text-decoration-line: none;
+}
+
+header nav a:hover{
+    margin: 1rem;
+    color: red;
+    text-decoration-line: none;
+}
