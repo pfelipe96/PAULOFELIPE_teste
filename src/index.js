@@ -14,7 +14,7 @@ ReactDOM.render(
         <Switch>
             <Route path="/motorista" exact={true} component={RecorderDriver} />
             <Route path="/passageiro" component={RecorderCustomer} />
-            <Route path="/corrida" component={RecorderRunning} />
+            <Route path="/" component={RecorderRunning} />
         </Switch>
     </BrowserRouter>,
     document.getElementById('root')
