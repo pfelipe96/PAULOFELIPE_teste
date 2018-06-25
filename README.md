@@ -1,7 +1,7 @@
 # frontend_vm
 Criação do dashBoard para teste de conhecimento
 
-## Client construído com React e Bootstrap v4.0.0, NodeJS e MongoDB (NoSQL).
+## Client construído com React e ReactStrap, NodeJS e MongoDB (NoSQL).
 
 ## Como o sistema está rodando:
 
