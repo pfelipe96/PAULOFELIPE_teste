@@ -57,9 +57,11 @@ class RenderTable extends Component {
                             return (
                                 <tr>
                                     <th>{index + 1}</th>
-                                    <td>{element.driver}</td>
-                                    <td>{element.customer}</td>
-                                    <td>{element.cash}</td>
+                                    <td>{element.nameDriver}</td>
+                                    <td>{element.cpf}</td>
+                                    <td>{element.gender}</td>
+                                    <td>{element.birthday}</td>
+                                    <td>{element.car}</td>
                                 </tr>
                             )
                         })

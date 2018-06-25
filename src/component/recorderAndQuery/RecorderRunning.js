@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './RecorderRunning.css';
 import { Button, Form, FormGroup, Label, Input, Row, Col, InputGroup, InputGroupAddon, Container, FormFeedback } from 'reactstrap';
 import Header from '../header/Header.js';
-import RenderTable from '../../utils/RenderTable';
+import RenderTable from './RenderTable';
 import axios from 'axios';
 
 class Recorder extends Component {
@@ -42,7 +42,7 @@ class Recorder extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://localhost:4000/recorder-running')
+        axios.get('http://localhost:4000/running')
             .then(response => {
                 this.setState(this.state.data = response.data);
             })
@@ -50,36 +50,49 @@ class Recorder extends Component {
     }
 
     watcherTextDriver = (event) => {
-        this.onVerifyField()
         this.setState({ driverInput: event.target.value });
+        this.onVerifyField()
     }
 
     watcherTextCustomer = (event) => {
-        this.onVerifyField()
         this.setState({ customerInput: event.target.value });
+        this.onVerifyField();
     }
 
     watcherTextCash = (event) => {
-        this.onVerifyField()
         this.setState({ cashInput: event.target.value });
+        this.onVerifyField();
     }
 
     handleSubmit = (event) => {
-        if (this.state.driverInput.length == 0) {
+        if (this.isNullOrEmpty(this.state.driverInput)) {
             this.setState({ fieldDriver: true });
             this.onVerifyField()
-        } else if(this.state.customerInput.length == 0) {
+        }else{
+            this.setState({ fieldDriver: false });
+        }
+        
+        if(this.isNullOrEmpty(this.state.customerInput)) {
             this.setState({ fieldCustomer: true });
             this.onVerifyField()
-        } else if(this.state.cashInput.length == 0) {
+        }else{
+            this.setState({ fieldCustomer: false });
+        }
+        
+        if(this.isNullOrEmpty(this.state.cashInput)) {
             this.setState({ fieldCash: true });
             this.onVerifyField()
-        } else {
+        }else{
+            this.setState({ fieldCash: false });
+        } 
+        
+        if(this.onVerifyField()){
             let dataPost = {
                 customer: this.state.customerInput,
                 driver: this.state.driverInput,
-                cash: this.state.cashInput + ",00"
+                cash: this.state.cashInput
             }
+
             this.onPostCallBack(dataPost);
         }
 
@@ -87,9 +100,10 @@ class Recorder extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://localhost:4000/recorder-running', objectValue)
+        axios.post('http://localhost:4000/running', objectValue)
             .then((response) => {
                 this.onGetCallBack()
+                this.clearFields()
             })
             .catch((error) => {
             });
@@ -99,35 +113,41 @@ class Recorder extends Component {
         return value == null || value === "" || value.lenght <= 0;
     }
 
-    onVerifyField = () => {
-        console.log(this.state.customerInput.length);
-        console.log(this.state.driverInput.length);
-        console.log(this.state.cashInput.length);
+    clearFields = () =>{
+        this.setState({driverInput: ""})
+        this.setState({cashInput: ""})
+        this.setState({customerInput: ""})
+    }
 
-        if (this.state.customerInput.length != 0 && this.state.driverInput.length != 0 && this.state.cashInput.length != 0) {
+    onVerifyField = () => {
+        if (!this.isNullOrEmpty(this.state.customerInput) && !this.isNullOrEmpty(this.state.driverInput) != 0 && !this.isNullOrEmpty(this.state.cashInput)) {
             this.setState({ visible: false });
+            return true
         } else {
             this.setState({ visible: true });
+            return false
         }
     }
 
     render() {
         return (
             <div>
-                <Header />
+                <Header/>
                 <Container>
                     <Form>
                         <Row>
                             <Col>
                                 <FormGroup>
                                     <Label>Motorista</Label>
-                                    <Input invalid={this.state.fieldDriver && this.isNullOrEmpty(this.state.driverInput)} valid={!this.isNullOrEmpty(this.state.driverInput)} value={this.state.driverInput} onChange={this.watcherTextDriver} placeholder="Digite o nome do motorista" />
+                                    <Input invalid={this.state.fieldDriver && this.isNullOrEmpty(this.state.driverInput)} valid={!this.isNullOrEmpty(this.state.driverInput)} value={this.state.driverInput} onChange={this.watcherTextDriver} type="name" placeholder="Digite o nome do motorista" />
+                                    <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Label>Passageiro</Label>
-                                    <Input invalid={this.state.fieldCustomer && this.isNullOrEmpty(this.state.customerInput)} valid={!this.isNullOrEmpty(this.state.customerInput)} value={this.state.customerInput} onChange={this.watcherTextCustomer} placeholder="Digite o nome do passageiro" />
+                                    <Input invalid={this.state.fieldCustomer && this.isNullOrEmpty(this.state.customerInput)} valid={!this.isNullOrEmpty(this.state.customerInput)} value={this.state.customerInput} onChange={this.watcherTextCustomer} type="name" placeholder="Digite o nome do passageiro" />
+                                    <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col>
@@ -136,7 +156,7 @@ class Recorder extends Component {
                                     <InputGroup size="normal">
                                         <InputGroupAddon addonType="prepend">R$</InputGroupAddon>
                                         <Input invalid={this.state.fieldCash && this.isNullOrEmpty(this.state.cashInput)} valid={!this.isNullOrEmpty(this.state.cashInput)} value={this.state.cashInput} onChange={this.watcherTextCash} placeholder="Valor da corrida" type="number" step="1" />
-                                        <InputGroupAddon addonType="append">,00</InputGroupAddon>
+                                        <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                     </InputGroup>
                                 </FormGroup>
                             </Col>

@@ -10,9 +10,9 @@ class Header extends Component {
             <div className="header-content">
                 <header>
                     <nav>
-                        <Link to="/corrida">Corrida</Link>
-                        <Link to="/corrida">Motorista</Link>
-                        <Link to="/corrida">Passageiro</Link>
+                        <Link to="/">Corrida</Link>
+                        <Link to="/motorista">Motorista</Link>
+                        <Link to="/passageiro">Passageiro</Link>
                     </nav>
                 </header>
             </div>
