@@ -50,7 +50,7 @@ class RecorderCustomer extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://localhost:4000/customer')
+        axios.get('http://165.227.53.83:3000/customer')
             .then(response => {
                 this.setState(this.state.data = response.data);                
             })
@@ -122,7 +122,7 @@ class RecorderCustomer extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://localhost:4000/customer', objectValue)
+        axios.post('http://165.227.53.83:3000/customer', objectValue)
             .then((response) => {
                 this.onGetCallBack()
                 this.clearFields()

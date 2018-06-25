@@ -54,7 +54,7 @@ class RecorderDriver extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://localhost:4000/driver')
+        axios.get('http://165.227.53.83:3000/driver')
             .then(response => {
                 this.setState(this.state.data = response.data);                
             })
@@ -166,7 +166,7 @@ class RecorderDriver extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://localhost:4000/driver', objectValue)
+        axios.post('http://165.227.53.83:3000/driver', objectValue)
             .then((response) => {
                 this.onGetCallBack()
                 this.clearFields()

@@ -42,7 +42,7 @@ class Recorder extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://localhost:4000/running')
+        axios.get('http://165.227.53.83:3000/running')
             .then(response => {
                 this.setState(this.state.data = response.data);
             })
@@ -100,7 +100,7 @@ class Recorder extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://localhost:4000/running', objectValue)
+        axios.post('http://165.227.53.83:3000/running', objectValue)
             .then((response) => {
                 this.onGetCallBack()
                 this.clearFields()
