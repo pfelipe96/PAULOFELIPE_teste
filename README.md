@@ -25,8 +25,8 @@ O sistema está rodando via servidor, pelo DigitalOcean.
       - recorderCustomer
         - RecorderCustomer.js
         - RecorderCustomer.css
+        
       - recorderDriver
-      
         - RecorderDriver.js
         - RecorderDriver.css
       
