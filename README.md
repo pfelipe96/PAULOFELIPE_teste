@@ -17,13 +17,16 @@ O sistema está rodando via servidor, pelo DigitalOcean.
 - index.css
 
 - componet
+
       - header
         - Header.css
         - Header.js
+        
       - recorderCustomer
         - RecorderCustomer.js
         - RecorderCustomer.css
       - recorderDriver
+      
         - RecorderDriver.js
         - RecorderDriver.css
       
