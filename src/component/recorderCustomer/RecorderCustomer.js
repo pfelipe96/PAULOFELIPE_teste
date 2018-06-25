@@ -195,7 +195,7 @@ class RecorderCustomer extends Component {
                             </Col>
                         </Row>
                     </Form>
-                    <Col className="button_recorder_running">
+                    <Col className="button_recorder_customer">
                         <Button color="success" onClick={this.handleSubmit} disabled={this.state.visible} onChange={this.onVerifyField}>Registrar corrida</Button>
                     </Col>
                     <RenderTable dataElement={this.state.data} headerDataElement={this.state.header} />
