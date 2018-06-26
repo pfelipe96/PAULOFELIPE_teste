@@ -1,4 +1,4 @@
-[Clique aqui para ser redirecionado para o respositório do frontEnd.](https://github.com/pfelipe96/backend_vm/)
+[Clique aqui para ser redirecionado para o respositório do backend.](https://github.com/pfelipe96/backend_vm/)
 
 # frontend_vm
 Criação do dashBoard para teste de conhecimento
