@@ -25,7 +25,7 @@ class RecorderDriver extends Component {
 
             nameDriverInput: "",
             cpfInput: "",
-            genderInput: "",
+            genderInput: "Masculino",
             birthdayInput: "",
             typeCarInput: "",
 
@@ -33,8 +33,8 @@ class RecorderDriver extends Component {
             fieldCPF: false,
             fieldGender: false,
             fieldBirthday: false,
-            fieldTypeCar: false,            
-            
+            fieldTypeCar: false,
+
             visible: true
         };
 
@@ -56,7 +56,7 @@ class RecorderDriver extends Component {
     onGetCallBack = () => {
         axios.get('http://165.227.53.83:3000/driver')
             .then(response => {
-                this.setState(this.state.data = response.data);                
+                this.setState(this.state.data = response.data);
             })
             .then(error => console.log(error))
     }
@@ -76,30 +76,30 @@ class RecorderDriver extends Component {
         //     data = event.target.value+".";
         //     console.log(data);
         // }
-        
+
         // if(data.length == 7){
         //     data = event.target.value+".";
         //     console.log(data);
         // }
-        
+
         // if(data.length == 11){
         //     data = event.target.value+"-";
         //     console.log(data);
         // }
-        
-        this.setState({ cpfInput: data});
+
+        this.setState({ cpfInput: data });
         this.onVerifyField();
     }
 
     watcherTextGender = (event) => {
-        console.log(event.target.value);
-        
-        this.setState({ genderInput: event.target.value });
+        console.log("------------------");
+        console.log("Value field: "+event.target.value);
+
+        this.setState({genderInput: event.target.value});
+        this.state.genderInput = event.target.value;
         this.onVerifyField();
 
-        console.log(this.state.genderInput);
-        console.log(event.target.value);
-
+        console.log("Value state: "+this.state.genderInput);
     }
 
 
@@ -220,7 +220,7 @@ class RecorderDriver extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>CPF</Label>
-                                    <Input invalid={this.state.fieldCPF && this.isNullOrEmpty(this.state.cpfInput)} valid={!this.isNullOrEmpty(this.state.cpfInput)} value={this.state.cpfInput} onChange={this.watcherTextCPF} type="text" placeholder="Digite o CPF do motorista" maxLength="11"/>
+                                    <Input invalid={this.state.fieldCPF && this.isNullOrEmpty(this.state.cpfInput)} valid={!this.isNullOrEmpty(this.state.cpfInput)} value={this.state.cpfInput} onChange={this.watcherTextCPF} type="text" placeholder="Digite o CPF do motorista" maxLength="11" />
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
@@ -229,7 +229,10 @@ class RecorderDriver extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>Sexo do motorista</Label>
-                                    <Input invalid={this.state.fieldGender && this.isNullOrEmpty(this.state.genderInput)} valid={!this.isNullOrEmpty(this.state.genderInput)} value={this.state.genderInput} onChange={this.watcherTextGender} type="text" placeholder="Digite o sexo do motorista"/>
+                                    <Input invalid={this.state.fieldGender && this.isNullOrEmpty(this.state.genderInput)} valid={!this.isNullOrEmpty(this.state.genderInput)} value={this.state.genderInput} onChange={this.watcherTextGender} type="select" name="select" id="multichoice">
+                                        <option>Masculino</option>
+                                        <option>Feminino</option>
+                                    </Input>
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
