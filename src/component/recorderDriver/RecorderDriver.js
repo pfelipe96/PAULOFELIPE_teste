@@ -25,7 +25,7 @@ class RecorderDriver extends Component {
 
             nameDriverInput: "",
             cpfInput: "",
-            genderInput: "Masculino",
+            genderInput: "",
             birthdayInput: "",
             typeCarInput: "",
 
@@ -34,6 +34,9 @@ class RecorderDriver extends Component {
             fieldGender: false,
             fieldBirthday: false,
             fieldTypeCar: false,
+
+            typing: false,
+            typingTimeout: 0,
 
             visible: true
         };
@@ -67,39 +70,41 @@ class RecorderDriver extends Component {
     }
 
     watcherTextCPF = (event) => {
+
         let data = event.target.value;
 
-        // if(data[3] == "."){
-        //     data = event.target.value = "";
-        //     console.log(data);
-        // }else if(data.length == 3){
-        //     data = event.target.value+".";
-        //     console.log(data);
-        // }
+        if(this.state.typingTimeout){
+            clearTimeout(this.state.typingTimeout);
+        }
 
-        // if(data.length == 7){
-        //     data = event.target.value+".";
-        //     console.log(data);
-        // }
+        this.setState({cpfInput: data})
 
-        // if(data.length == 11){
-        //     data = event.target.value+"-";
-        //     console.log(data);
-        // }
+        this.state.typingTimeout = setTimeout(() =>{
+            console.log("Entrou");
+            let dataArray = Array.from(data);
+            
+            let interator = 3;
+            for(let i in dataArray){
+                if(i % interator == 0 && i > 0){
+                    let count = i;
+                    while(dataArray[count+1] != null){
+                        dataArray[count+1] = dataArray[count]
+                        console.log(dataArray[i]);
+                        count++;
+                    }
+                    interator = (interator*2)+1;
+                }
+            }
 
-        this.setState({ cpfInput: data });
+            console.log(dataArray);
+        }, 1000)
+
         this.onVerifyField();
     }
 
     watcherTextGender = (event) => {
-        console.log("------------------");
-        console.log("Value field: "+event.target.value);
-
-        this.setState({genderInput: event.target.value});
         this.state.genderInput = event.target.value;
         this.onVerifyField();
-
-        console.log("Value state: "+this.state.genderInput);
     }
 
 
@@ -230,6 +235,7 @@ class RecorderDriver extends Component {
                                 <FormGroup>
                                     <Label>Sexo do motorista</Label>
                                     <Input invalid={this.state.fieldGender && this.isNullOrEmpty(this.state.genderInput)} valid={!this.isNullOrEmpty(this.state.genderInput)} value={this.state.genderInput} onChange={this.watcherTextGender} type="select" name="select" id="multichoice">
+                                        <option></option>
                                         <option>Masculino</option>
                                         <option>Feminino</option>
                                     </Input>
