@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './RecorderDriver.css';
 import { Button, Form, FormGroup, Label, Input, Row, Col, Container, FormFeedback } from 'reactstrap';
 import Header from '../header/Header.js';
-import RenderTable from './RenderTable';
+import RenderTable from '../../utils/RenderTable.js';
 import axios from 'axios';
+import RequestApi from '../../utils/RequestApi.js';
 
 
 
@@ -16,13 +17,13 @@ class RecorderDriver extends Component {
             { element: 'CPF' },
             { element: 'Sexo' },
             { element: 'Data de Nascimento' },
-            { element: 'Modelo do Carro' },
+            { element: 'Modelo do Carro' }
         ];
 
         this.state = {
             data: null,
             header: header,
-
+            
             nameDriverInput: "",
             cpfInput: "",
             genderInput: "",
@@ -57,7 +58,7 @@ class RecorderDriver extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://165.227.53.83:3000/driver')
+        axios.get(RequestApi.apiDriver())
             .then(response => {
                 this.setState(this.state.data = response.data);
             })
@@ -195,7 +196,6 @@ class RecorderDriver extends Component {
     }
 
     onVerifyField = () => {
-
         if (!this.isNullOrEmpty(this.state.nameDriverInput) && !this.isNullOrEmpty(this.state.typeCarInput)
             && !this.isNullOrEmpty(this.state.birthdayInput) && !this.isNullOrEmpty(this.state.cpfInput) &&
             !this.isNullOrEmpty(this.state.genderInput)) {
@@ -261,7 +261,7 @@ class RecorderDriver extends Component {
                     <Col className="button_recorder_driver">
                         <Button color="success" onClick={this.handleSubmit} disabled={this.state.visible} onChange={this.onVerifyField}>Registrar corrida</Button>
                     </Col>
-                    <RenderTable dataElement={this.state.data} headerDataElement={this.state.header} />
+                    <RenderTable dataElement={this.state.data} headerDataElement={this.state.header}/>
                 </Container>
             </div>
         );

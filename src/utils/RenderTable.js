@@ -12,6 +12,9 @@ class RenderTable extends Component {
         };
 
         this.onDismiss = this.onDismiss.bind(this);
+
+        console.log(this.props.keyData);
+
     }
 
     onDismiss() {
@@ -57,11 +60,15 @@ class RenderTable extends Component {
                             return (
                                 <tr>
                                     <th>{index + 1}</th>
-                                    <td>{element.nameDriver}</td>
-                                    <td>{element.cpf}</td>
-                                    <td>{element.gender}</td>
-                                    <td>{element.birthday}</td>
-                                    <td>{element.car}</td>
+                                    {
+                                        Object.keys(element).map((key, index) => {
+                                            if(index > 0){
+                                                return (
+                                                    <td>{element[key]}</td>
+                                                )
+                                            }
+                                        })
+                                    }
                                 </tr>
                             )
                         })
