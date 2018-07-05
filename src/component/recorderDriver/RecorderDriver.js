@@ -62,7 +62,7 @@ class RecorderDriver extends Component {
             .then(response => {
                 this.setState(this.state.data = response.data);
             })
-            .then(error => console.log(error))
+            .then(error => console.log("503"))
     }
 
     watcherTextNameDriver = (event) => {
@@ -81,23 +81,23 @@ class RecorderDriver extends Component {
         this.setState({cpfInput: data})
 
         this.state.typingTimeout = setTimeout(() =>{
-            console.log("Entrou");
-            let dataArray = Array.from(data);
+            // console.log("Entrou");
+            // let dataArray = Array.from(data);
             
-            let interator = 3;
-            for(let i in dataArray){
-                if(i % interator == 0 && i > 0){
-                    let count = i;
-                    while(dataArray[count+1] != null){
-                        dataArray[count+1] = dataArray[count]
-                        console.log(dataArray[i]);
-                        count++;
-                    }
-                    interator = (interator*2)+1;
-                }
-            }
+            // let interator = 3;
+            // for(let i in dataArray){
+            //     if(i % interator == 0 && i > 0){
+            //         let count = i;
+            //         while(dataArray[count+1] != null){
+            //             dataArray[count+1] = dataArray[count]
+            //             console.log(dataArray[i]);
+            //             count++;
+            //         }
+            //         interator = (interator*2)+1;
+            //     }
+            // }
 
-            console.log(dataArray);
+            // console.log(dataArray);
         }, 1000)
 
         this.onVerifyField();
@@ -172,7 +172,7 @@ class RecorderDriver extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://165.227.53.83:3000/driver', objectValue)
+        axios.post(RequestApi.apiDriver(), objectValue)
             .then((response) => {
                 this.onGetCallBack()
                 this.clearFields()

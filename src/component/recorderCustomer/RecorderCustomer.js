@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import './RecorderCustomer.css';
 import { Button, Form, FormGroup, Label, Input, Row, Col, Container, FormFeedback } from 'reactstrap';
 import Header from '../header/Header.js';
-import RenderTable from './RenderTable';
+import RenderTable from '../../utils/RenderTable.js';
 import axios from 'axios';
-
-
+import RequestApi from '../../utils/RequestApi.js';
 
 class RecorderCustomer extends Component {
     constructor(props) {
@@ -50,11 +49,11 @@ class RecorderCustomer extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://165.227.53.83:3000/customer')
+        axios.get(RequestApi.apiCustomer())
             .then(response => {
                 this.setState(this.state.data = response.data);                
             })
-            .then(error => console.log(error))
+            .then(error => console.log("503"))
     }
 
     watcherTextNameCustomer = (event) => {
@@ -122,7 +121,7 @@ class RecorderCustomer extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://165.227.53.83:3000/customer', objectValue)
+        axios.post(RequestApi.apiCustomer(), objectValue)
             .then((response) => {
                 this.onGetCallBack()
                 this.clearFields()
@@ -165,15 +164,15 @@ class RecorderCustomer extends Component {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label>Motorista</Label>
-                                    <Input invalid={this.state.fieldNameCustomer && this.isNullOrEmpty(this.state.nameCustomerInput)} valid={!this.isNullOrEmpty(this.state.nameCustomerInput)} value={this.state.nameCustomerInput} onChange={this.watcherTextNameCustomer} type="name" placeholder="Digite o nome do motorista" />
+                                    <Label>Passageiro</Label>
+                                    <Input invalid={this.state.fieldNameCustomer && this.isNullOrEmpty(this.state.nameCustomerInput)} valid={!this.isNullOrEmpty(this.state.nameCustomerInput)} value={this.state.nameCustomerInput} onChange={this.watcherTextNameCustomer} type="name" placeholder="Digite o nome do passageiro" />
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Label>CPF</Label>
-                                    <Input invalid={this.state.fieldCPF && this.isNullOrEmpty(this.state.cpfInput)} valid={!this.isNullOrEmpty(this.state.cpfInput)} value={this.state.cpfInput} onChange={this.watcherTextCPF} type="text" placeholder="Digite o CPF do motorista" maxLength="11"/>
+                                    <Input invalid={this.state.fieldCPF && this.isNullOrEmpty(this.state.cpfInput)} valid={!this.isNullOrEmpty(this.state.cpfInput)} value={this.state.cpfInput} onChange={this.watcherTextCPF} type="text" placeholder="Digite o CPF do passageiro" maxLength="11"/>
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
@@ -181,15 +180,15 @@ class RecorderCustomer extends Component {
                         <Row>
                             <Col>
                                 <FormGroup>
-                                    <Label>Sexo do motorista</Label>
-                                    <Input invalid={this.state.fieldGender && this.isNullOrEmpty(this.state.genderInput)} valid={!this.isNullOrEmpty(this.state.genderInput)} value={this.state.genderInput} onChange={this.watcherTextGender} type="text" placeholder="Digite o sexo do motorista"/>
+                                    <Label>Sexo do passageiro</Label>
+                                    <Input invalid={this.state.fieldGender && this.isNullOrEmpty(this.state.genderInput)} valid={!this.isNullOrEmpty(this.state.genderInput)} value={this.state.genderInput} onChange={this.watcherTextGender} type="text" placeholder="Digite o sexo do passageiro"/>
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
                             <Col>
                                 <FormGroup>
                                     <Label>Data de nascimento</Label>
-                                    <Input invalid={this.state.fieldBirthday && this.isNullOrEmpty(this.state.birthdayInput)} valid={!this.isNullOrEmpty(this.state.birthdayInput)} value={this.state.birthdayInput} onChange={this.watcherTextBirthday} type="date" placeholder="Digite a data de nascimento do motorista" />
+                                    <Input invalid={this.state.fieldBirthday && this.isNullOrEmpty(this.state.birthdayInput)} valid={!this.isNullOrEmpty(this.state.birthdayInput)} value={this.state.birthdayInput} onChange={this.watcherTextBirthday} type="date" placeholder="Digite a data de nascimento do passageiro" />
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>

@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './RecorderRunning.css';
 import { Button, Form, FormGroup, Label, Input, Row, Col, InputGroup, InputGroupAddon, Container, FormFeedback } from 'reactstrap';
 import Header from '../header/Header.js';
-import RenderTable from './RenderTable';
+import RenderTable from '../../utils/RenderTable.js';
 import axios from 'axios';
+import RequestApi from '../../utils/RequestApi.js';
+
 
 class Recorder extends Component {
     constructor(props) {
@@ -42,7 +44,7 @@ class Recorder extends Component {
 
 
     onGetCallBack = () => {
-        axios.get('http://165.227.53.83:3000/running')
+        axios.get(RequestApi.apiRunning())
             .then(response => {
                 this.setState(this.state.data = response.data);
             })
@@ -100,7 +102,7 @@ class Recorder extends Component {
     }
 
     onPostCallBack(objectValue) {
-        axios.post('http://165.227.53.83:3000/running', objectValue)
+        axios.post(RequestApi.apiRunning(), objectValue)
             .then((response) => {
                 this.onGetCallBack()
                 this.clearFields()
@@ -139,7 +141,7 @@ class Recorder extends Component {
                             <Col>
                                 <FormGroup>
                                     <Label>Motorista</Label>
-                                    <Input invalid={this.state.fieldDriver && this.isNullOrEmpty(this.state.driverInput)} valid={!this.isNullOrEmpty(this.state.driverInput)} value={this.state.driverInput} onChange={this.watcherTextDriver} type="name" placeholder="Digite o nome do motorista" />
+                                    <Input invalid={this.state.fieldDriver && this.isNullOrEmpty(this.state.driverInput)} valid={!this.isNullOrEmpty(this.state.driverInput)} value={this.state.driverInput} onChange={this.watcherTextDriver} placeholder="Digite o nome do motorista" type="name"/>
                                     <FormFeedback>O campo está vazio, por favor preencha</FormFeedback>
                                 </FormGroup>
                             </Col>
